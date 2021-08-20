@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lorenzojkrl/baby-graph/issues"
   },
-  "homepage": "https://github.com/lorenzojkrl/baby-graph#readme"
+  "homepage": "https://github.com/lorenzojkrl/baby-graph#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
