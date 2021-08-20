@@ -1,5 +1,7 @@
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
+// require('express-graphql') returns an object 
+// with a property called graphqlHTTP that is the function I want to call
+const { graphqlHTTP } = require('express-graphql');
 
 const app = express();
 
@@ -13,9 +15,8 @@ app.listen(4000, () => {
 })
 
 
-  ```
-npm init
-npm install express --save
-npm install graphql express-graphql
-sudo npm install nodemon -g
-```
+
+// npm init
+// npm install express --save
+// npm install graphql express-graphql
+// sudo npm install nodemon -g
