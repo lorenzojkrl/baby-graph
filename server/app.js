@@ -7,7 +7,7 @@ app.use('/mygraphql', graphqlHTTP({
   graphiql: true // when we serve mygraphql, graphiql should be shown
 }))
 
-// run with node app to see the app at localhost:4000
+// run with nodemon app to see the app at localhost:4000
 app.listen(4000, () => {
   console.log('listening for requests');
 })
@@ -17,5 +17,5 @@ app.listen(4000, () => {
 npm init
 npm install express --save
 npm install graphql express-graphql
-npm install nodemon
+sudo npm install nodemon -g
 ```
