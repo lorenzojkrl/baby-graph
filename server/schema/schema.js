@@ -23,7 +23,7 @@ const UserType = new graphql.GraphQLObjectType({
 })
 
 // RootQuery
-// RootQuery is the "path" that allows to reach nodes 
+// RootQuery is the "path" that allows to query the graph to reach nodes 
 const RootQuery = new graphql.GraphQLObjectType({
   name: "RootQueryType", // for documentation purposes
   description: "",
