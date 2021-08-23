@@ -1,6 +1,14 @@
 // Schema is a map of the relationship between data points on the graph
 const graphql = require('graphql')
-
+var _ = require('lodash')
+// dummy data
+// users in userData have the fields declared in UserType
+let userData = [
+  { id: '654', age: 54, name: "Sami", height: 187 },
+  { id: '652', age: 44, name: "Samuel", height: 178 },
+  { id: '653', age: 34, name: "Samantha", height: 157 },
+  { id: '651', age: 44, name: "Sam", height: 177 }
+]
 // const {
 //   GraphQLObjectType,
 //   GraphQLID,
@@ -10,6 +18,7 @@ const graphql = require('graphql')
 // } = graphql
 
 // Create types
+
 const UserType = new graphql.GraphQLObjectType({
   name: "User",
   description: "Documentation for user",
@@ -18,7 +27,8 @@ const UserType = new graphql.GraphQLObjectType({
   fields: () => ({
     id: { type: graphql.GraphQLString },
     name: { type: graphql.GraphQLString },
-    age: { type: graphql.GraphQLInt }
+    age: { type: graphql.GraphQLInt },
+    height: { type: graphql.GraphQLInt }
   })
 })
 
@@ -33,6 +43,7 @@ const RootQuery = new graphql.GraphQLObjectType({
       args: { id: { type: graphql.GraphQLString } }, // we may want to pass some args e.g. id to retrieve a specific user
       resolve(parent, args) { // resolve with data. In this case, parents refer to UserType and args to the args obj
         // get & return data from a data source
+        return _.find(userData, { id: args.id })
       }
     }
   }
