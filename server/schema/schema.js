@@ -9,6 +9,20 @@ let userData = [
   { id: '653', age: 34, name: "Samantha", height: 157 },
   { id: '651', age: 44, name: "Sam", height: 177 }
 ]
+
+let hobbiesData = [
+  { id: '454', title: 'Rowing', description: "Strenghten your arms" },
+  { id: '452', title: "Knitting", description: "Move your hands" },
+  { id: '453', title: "Eating", description: "Open your mouth" },
+  { id: '451', title: "Hiking", description: "Wear boots and walk" }
+]
+
+let postData = [
+  { id: '354', title: 'J. K. Rowing', comment: "The sky is blue" },
+  { id: '352', title: 'Motonet is cheap', comment: "The sky is a bike" },
+  { id: '351', title: 'JKRL', comment: "Blue is the way" },
+
+]
 // const {
 //   GraphQLObjectType,
 //   GraphQLID,
@@ -25,10 +39,30 @@ const UserType = new graphql.GraphQLObjectType({
   // fields contains actual data of User
   // callback f return an object that specifies the types of props
   fields: () => ({
-    id: { type: graphql.GraphQLString },
+    id: { type: graphql.GraphQLID },
     name: { type: graphql.GraphQLString },
     age: { type: graphql.GraphQLInt },
     height: { type: graphql.GraphQLInt }
+  })
+})
+
+const HobbyType = new graphql.GraphQLObjectType({
+  name: "Hobby",
+  description: "Hobby description",
+  fields: () => ({
+    id: { type: graphql.GraphQLID },
+    title: { type: graphql.GraphQLString },
+    description: { type: graphql.GraphQLInt },
+  })
+})
+
+const PostType = new graphql.GraphQLObjectType({
+  name: "Post",
+  description: "Post description",
+  fields: () => ({
+    id: { type: graphql.GraphQLID },
+    title: { type: graphql.GraphQLString },
+    comment: { type: graphql.GraphQLInt },
   })
 })
 
@@ -44,6 +78,21 @@ const RootQuery = new graphql.GraphQLObjectType({
       resolve(parent, args) { // resolve with data. In this case, parents refer to UserType and args to the args obj
         // get & return data from a data source
         return _.find(userData, { id: args.id })
+      }
+    },
+    hobby: {
+      type: HobbyType,
+      args: { id: { type: graphql.GraphQLID } },
+      resolve(parent, args) {
+        return _.find(hobbiesData, { id: args.id })
+      }
+    },
+    post: {
+      type: PostType,
+      args: { id: { type: graphql.GraphQLID } },
+      resolve(parent, args) {
+        return _.find(postData, { id: args.id })
+
       }
     }
   }
