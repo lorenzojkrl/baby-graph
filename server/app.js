@@ -4,12 +4,19 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 
 const schema = require('./schema/schema')
+const types_schema = require('./schema/types_schema')
+
 
 const app = express();
 
 app.use('/mygraphql', graphqlHTTP({
-  graphiql: true, // when we serve mygraphql, graphiql should be shown
+  graphiql: true, // show graphiql
   schema
+}))
+
+app.use('/mygraphql-types', graphqlHTTP({
+  graphiql: true, // show graphiql
+  schema: types_schema
 }))
 
 // run with: nodemon app to see the app at localhost:4000/mygraphql
