@@ -17,14 +17,12 @@ let hobbiesData = [
   { id: '451', title: "Hiking", description: "Wear boots and walk", userId: "654" }
 ]
 
-let postData = [
+let postsData = [
   { id: '354', title: 'J. K. Rowing', comment: "The sky is blue", userId: "654" },
   { id: '352', title: 'Motonet is cheap', comment: "The sky is a bike", userId: "654" },
   { id: '351', title: 'JKRL', comment: "Blue is the way", userId: "653" },
   { id: '350', title: 'Building A Mind', comment: "Mind is the way", userId: "652" },
   { id: '355', title: 'Travellers', comment: "One way or another", userId: "651" },
-
-
 ]
 
 // const {
@@ -51,7 +49,7 @@ const UserType = new graphql.GraphQLObjectType({
     posts: {
       type: new graphql.GraphQLList(PostType),
       resolve(parent, args) {
-        return _.filter(postData, { userId: parent.id })
+        return _.filter(postsData, { userId: parent.id })
       }
     },
     // Query user's hobbies
@@ -112,6 +110,12 @@ const RootQuery = new graphql.GraphQLObjectType({
         return _.find(usersData, { id: args.id })
       }
     },
+    users: {
+      type: new graphql.GraphQLList(UserType),
+      resolve(parent, args) {
+        return usersData
+      }
+    },
     hobby: {
       type: HobbyType,
       args: { id: { type: graphql.GraphQLID } },
@@ -119,12 +123,23 @@ const RootQuery = new graphql.GraphQLObjectType({
         return _.find(hobbiesData, { id: args.id })
       }
     },
+    hobbies: {
+      type: new graphql.GraphQLList(HobbyType),
+      resolve(parent, args) {
+        return hobbiesData
+      }
+    },
     post: {
       type: PostType,
       args: { id: { type: graphql.GraphQLID } },
       resolve(parent, args) {
-        return _.find(postData, { id: args.id })
-
+        return _.find(postsData, { id: args.id })
+      }
+    },
+    posts: {
+      type: new graphql.GraphQLList(PostType),
+      resolve(parent, args) {
+        return postsData
       }
     }
   }
