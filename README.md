@@ -59,8 +59,13 @@ In a system like REST, you can only pass a single set of arguments - the query p
 
 ### [Schema](https://graphql.org/learn/schema/#type-system)
 
-Map of the relationships between data points on the graph.
-Every GraphQL service defines a set of types which completely describe the set of possible data you can query on that service. Then, when queries come in, they are validated and executed against that schema.
+Map the relationships among data points on the graph.
+Every GraphQL service defines a set of types that completely describe the set of possible data you can query on that service. Then, when queries come in, they are validated and executed against that schema.
+A schema contains
+
+- types,
+- relationships among types,
+- root query,
 
 ### [Types](https://graphql.org/learn/schema/#object-types-and-fields)
 
@@ -74,5 +79,15 @@ type Character {
   isEvil: Boolean!
 }
 ```
+
+### [Query](https://graphql.org/learn/queries/#operation-name)
+
+Query is one of the three operation types allowed in GraphQL: <i>query, mutation, or subscription</i>. Using `query` allows fetching data from a server.
+
+### [Mutations](https://graphql.org/learn/queries/#mutations)
+
+Mutation is one of the three operation types allowed in GraphQL: <i>query, mutation, or subscription</i>. Using `mutation` allows for modifying data on a server. </br>
+As a convention "any operations that cause writes should be sent explicitly via a mutation". </br>
+Note that it is possible to mutate and query a new value of a field with one request.
 
 - <b>Root Query:</b> "path" that allows to query the graph to reach nodes

@@ -12,7 +12,7 @@ app.use('/mygraphql', graphqlHTTP({
   schema
 }))
 
-// run with nodemon app to see the app at localhost:4000
+// run with: nodemon app to see the app at localhost:4000/mygraphql
 app.listen(4000, () => {
   console.log('listening for requests');
 })
@@ -23,3 +23,4 @@ app.listen(4000, () => {
 // npm install express --save
 // npm install graphql express-graphql
 // sudo npm install nodemon -g
+// npm install lodash --save

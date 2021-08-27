@@ -70,7 +70,7 @@ const HobbyType = new graphql.GraphQLObjectType({
   fields: () => ({
     id: { type: graphql.GraphQLID },
     title: { type: graphql.GraphQLString },
-    description: { type: graphql.GraphQLInt },
+    description: { type: graphql.GraphQLString },
     user: {
       type: UserType,
       resolve(parent, args) {
@@ -86,12 +86,12 @@ const PostType = new graphql.GraphQLObjectType({
   fields: () => ({
     id: { type: graphql.GraphQLID },
     title: { type: graphql.GraphQLString },
-    comment: { type: graphql.GraphQLInt },
+    comment: { type: graphql.GraphQLString },
     user: {
       type: UserType,
       // In this case, parent is PostType
       resolve(parent, args) {
-        // within user, get the user with an id that is equal to parent.userId
+        // within userData, get the user with an id that is equal to parent.userId
         return _.find(usersData, { id: parent.userId })
       }
     }
@@ -130,7 +130,69 @@ const RootQuery = new graphql.GraphQLObjectType({
   }
 })
 
+// Mutations
+const Mutation = new graphql.GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    // Create and add new user, see it as a method to create/add user
+    createUser: {
+      type: UserType,
+      args: {
+        // id: {type: graphql.GraphQLID}
+        name: { type: graphql.GraphQLString },
+        age: { type: graphql.GraphQLInt },
+        height: { type: graphql.GraphQLInt }
+      },
+      resolve(parent, args) {
+        let user = {
+          name: args.name,
+          age: args.age,
+          height: args.height
+        }
+        return user;
+      }
+    },
+    // Create and add new post
+    createPost: {
+      type: PostType,
+      args: {
+        // id: {type: graphql.GraphQLID}
+        title: { type: graphql.GraphQLString },
+        comment: { type: graphql.GraphQLString },
+        userId: { type: graphql.GraphQLID }
+      },
+      resolve(parent, args) {
+        let post = {
+          title: args.title,
+          comment: args.comment,
+          userId: args.userId
+        }
+        return post;
+      }
+    },
+    // Create and add new hobby
+    createHobby: {
+      type: HobbyType,
+      args: {
+        // id: { type: graphql.GraphQLID },
+        title: { type: graphql.GraphQLString },
+        description: { type: graphql.GraphQLString },
+        userId: { type: graphql.GraphQLID }
+      },
+      resolve(parent, args) {
+        let hobby = {
+          title: args.title,
+          description: args.description,
+          userId: args.userId
+        }
+        return hobby;
+      }
+    }
+  }
+})
+
 // export schema's query
 module.exports = new graphql.GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 })
