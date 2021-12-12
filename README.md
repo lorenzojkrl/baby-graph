@@ -12,6 +12,10 @@ GraphQL provides: </br>
 
 A GraphQL service is created by defining types and fields on those types, then providing functions for each field on each type.
 
+On the other side, REST is resource-based. Every resource, for example a book, has its own address which identifies it, for example /books/42. All operations done to the resource are done with HTTP requests to its URL. The action depends on the HTTP method used.
+
+GraphQL forms a query describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST.
+
 ## Some definitions:
 
 ### [Fields](https://graphql.org/learn/queries/#fields)
